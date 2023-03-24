@@ -33,4 +33,5 @@ MODELS = [
 DEFAULT_COMMANDS = {
     'list': 'list of possible bot commands',
     'register': 'register',
+    'add_ticket': 'create issue',
 }
