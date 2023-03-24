@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  kolesabot:
+    build: .
+    image: kolesabot
+    volumes:
+      - kolesabot_data:/data
+    env_file: .env
+    container_name: kolesabot
+volumes:
+  kolesabot_data:
