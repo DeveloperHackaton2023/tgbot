@@ -32,4 +32,5 @@ MODELS = [
 
 DEFAULT_COMMANDS = {
     'list': 'list of possible bot commands',
+    'register': 'register',
 }
