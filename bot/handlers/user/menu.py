@@ -1,5 +1,5 @@
-from aiogram import Router
-from aiogram.filters import Command, StateFilter, or_f
+from aiogram import Router, F
+from aiogram.filters import StateFilter, and_f, invert_f
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove
 
@@ -26,8 +26,10 @@ async def check_menu_command(message: Message, state: FSMContext, data: dict):
 
 
 def setup(r: Router):
-    # NOTE: state and F.text not startswith /
-    r.message.register(show_menu, StateFilter(FSM.show_menu))
+    r.message.register(show_menu, and_f(
+        StateFilter(FSM.show_menu),
+        invert_f(F.text.startswith('/'))
+    ))
     r.message.register(
         check_menu_command,
         StateFilter(FSM.check_menu_command)
