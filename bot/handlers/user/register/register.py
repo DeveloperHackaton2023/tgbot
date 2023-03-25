@@ -12,5 +12,6 @@ class RegisterHandler(BaseHandler):
         user = AuthService.try_get_user(
             iin=self.ctx.iin, phone_number=self.ctx.phone_number)
         self.set(self.props.osi_user, user)
-        await self.render_widget(f'Авторизовано: {user.fullname} ✅')
+        status_message = f'<u>Авторизовано:</u> <b>{user.fullname}</b> ✅'
+        await self.render_widget(status_message)
         await show_menu(self.event, state=self.state)
