@@ -1,8 +1,8 @@
 from typing import Any
 
-from services.auth import AuthService
+from services.user import UserService
 from ui.components.ticket import TicketForm
-from ui.keyboards.flat import user_flats, FlatsMarkup
+from ui.keyboards.flat import FlatsMarkup
 from ._base import BaseHandler
 from ._states import FSM
 
@@ -13,7 +13,7 @@ class InitRegisterHandler(BaseHandler):
         await self.event.delete()
         self.clean_context(exclude=[self.props.osi_user])
 
-        user_info = AuthService.try_get_user_info(self.ctx.osi_user)
+        user_info = UserService.try_get_user_info(self.ctx.osi_user)
         self.set(self.props.user_info, user_info)
 
         text = TicketForm().render()

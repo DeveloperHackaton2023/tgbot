@@ -17,7 +17,7 @@ class TicketsService:
             "description": ticket.description
         }
         try:
-            response = requests.get(
+            response = requests.post(
                 API_URL + 'user/add/ticket/', json=input_data)
             if response.status_code != 200:
                 raise ApiRequestFailed
