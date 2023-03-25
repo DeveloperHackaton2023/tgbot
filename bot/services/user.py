@@ -1,6 +1,6 @@
 from dateutil.parser import parse
 
-from ._types import OsiUser, OsiUserInfo, Flat, Ticket, TicketInfo
+from ._types import OsiUser, OsiUserInfo, Flat, Ticket, TicketInfo, TicketStatus
 from ._base import BaseApiService
 
 
@@ -31,5 +31,19 @@ class UserService(BaseApiService):
                 description=data['description']
             ),
             created_at=parse(data['created']),
-            status=data['statuses'][-1]['title']
+            status=cls._serialize_status(data['statuses'][-1]['title'])
         )
+
+    @classmethod
+    def _serialize_status(cls, status: str) -> TicketStatus:
+        match status:
+            case 'Created':
+                return TicketStatus.CREATED
+            case 'InProgress':
+                return TicketStatus.IN_PROGRESS
+            case 'Denied':
+                return TicketStatus.DENIED
+            case 'Success':
+                return TicketStatus.SUCCESS
+            case _:
+                raise ValueError

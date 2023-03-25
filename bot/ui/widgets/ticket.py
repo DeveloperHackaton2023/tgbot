@@ -6,7 +6,7 @@ class Ticket:
         self.info = info
 
     def render(self) -> str:
-        text = f'<u>{self.info.ticket.subject}</u>\n'
-        text += self.info.ticket.description + '\n'
-        text += f'Статус: {self.info.status}'
+        text = f'<b>{self.info.ticket.subject}</b>\n'
+        # text += self.info.ticket.description + '\n\n'
+        text += f'Статус: {self.info.status.value}'
         return text

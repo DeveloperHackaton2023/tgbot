@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
+from enum import Enum
 
 
 @dataclass
@@ -15,10 +16,17 @@ class Ticket:
     description: str
 
 
+class TicketStatus(Enum):
+    CREATED = 'Создано 💾'
+    IN_PROGRESS = 'В работе 🔨'
+    DENIED = 'Оклонено ❌'
+    SUCCESS = 'Выполнено ✅'
+
+
 @dataclass
 class TicketInfo:
     ticket: Ticket
-    status: str
+    status: TicketStatus
     created_at: datetime
 
 
