@@ -1,5 +1,6 @@
 from typing import Any
 
+from ui.components.auth import AuthForm
 from ._base import BaseHandler
 from ._states import FSM
 from .register import RegisterHandler
@@ -8,6 +9,7 @@ from .register import RegisterHandler
 class GetPhoneNumberHandler(BaseHandler):
     async def handle(self) -> Any:
         await self.state.set_state(FSM.finish)
+        await self.event.delete()
 
         phone_number = self.event.contact.phone_number
         self.set(self.props.phone_number, phone_number)

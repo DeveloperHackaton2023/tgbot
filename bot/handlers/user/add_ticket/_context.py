@@ -1,17 +1,24 @@
 from typing import Optional
+from dataclasses import dataclass
 
-from contrib.handlers.message.context_manager import (
-    BaseContext, BaseContextManager
-)
-
-
-class _AddTicketContext(BaseContext):
-    flat_id: Optional[int] = None
-    iin: Optional[int] = None
-    phone: Optional[str] = None
-    subject: Optional[int] = None
-    description: Optional[int] = None
+from contrib.handlers.message.context_manager import BaseContextManager, Property
 
 
-class AddTicketContextManager(BaseContextManager[_AddTicketContext]):
-    props = _AddTicketContext
+class _Properties:
+    iin = Property('iin', str)
+    phone_number = Property('author', str)
+
+
+@dataclass
+class _AddTicketContext:
+    iin: Optional[_Properties.iin.type]
+    phone_number: Optional[_Properties.phone_number.type]
+
+
+class AddTicketContextManager(BaseContextManager):
+    props: _Properties = _Properties
+    _context_type = _AddTicketContext
+
+    @property
+    def ctx(self) -> _AddTicketContext:
+        return super().ctx

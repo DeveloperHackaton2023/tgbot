@@ -1,14 +1,28 @@
 from typing import Optional
+from dataclasses import dataclass
 
-from contrib.handlers.message.context_manager import (
-    BaseContextManager, BaseContext
-)
+from aiogram.types import Message
 
-
-class _RegisterContext(BaseContext):
-    iin: Optional[int] = None
-    phone_number: Optional[str] = None
+from contrib.handlers.message.context_manager import BaseContextManager, Property
 
 
-class RegisterContextManager(BaseContextManager[_RegisterContext]):
-    props = _RegisterContext
+class _Properties:
+    message = Property('messsage', Message)
+    iin = Property('iin', int)
+    phone_number = Property('author', str)
+
+
+@dataclass
+class _RegisterContext:
+    message: Optional[_Properties.message.type]
+    iin: Optional[_Properties.iin.type]
+    phone_number: Optional[_Properties.phone_number.type]
+
+
+class RegisterContextManager(BaseContextManager):
+    props: _Properties = _Properties
+    _context_type = _RegisterContext
+
+    @property
+    def ctx(self) -> _RegisterContext:
+        return super().ctx
