@@ -12,6 +12,8 @@ class GetPhoneNumberHandler(BaseHandler):
         await self.event.delete()
 
         phone_number = self.event.contact.phone_number
+        if not phone_number.startswith('+'):
+            phone_number = '+' + phone_number
         self.set(self.props.phone_number, phone_number)
 
         await RegisterHandler(
