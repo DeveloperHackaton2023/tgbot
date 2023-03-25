@@ -1,7 +1,7 @@
 import requests
 
 from settings import API_URL
-from .auth import Ticket, OsiUser
+from .auth import Ticket, OsiUser, ApiRequestFailed
 
 
 class TicketsService:
@@ -14,4 +14,11 @@ class TicketsService:
             "subject": ticket.subject,
             "description": ticket.description
         }
-        requests.post(API_URL + 'user/add/ticket/', json=input_data)
+        try:
+            response = requests.post(
+                API_URL + 'user/add/ticket/', json=input_data)
+            if response.status_code != 200:
+                raise ApiRequestFailed
+        except Exception as e:
+            print(e)
+            raise ApiRequestFailed

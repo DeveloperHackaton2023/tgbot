@@ -1,6 +1,6 @@
 from typing import Any
 
-from services.auth import Ticket
+from services.auth import Ticket, ApiRequestFailed
 from services.tickets import TicketsService
 from ui.keyboards.menu import MenuMarkup
 from .._states import FSM
@@ -14,11 +14,15 @@ class GetDescriptionHandler(BaseHandler):
         self.set(self.props.description, self.event.text)
         await self.render_widget()
 
-        TicketsService.send_ticket(
-            self.ctx.user_info.user,
-            self.ctx.flat_id,
-            Ticket(self.ctx.subject, self.ctx.description)
-        )
+        try:
+            TicketsService.send_ticket(
+                self.ctx.user_info.user,
+                self.ctx.flat_id,
+                Ticket(self.ctx.subject, self.ctx.description)
+            )
+            status_message = '<b><u>Успешно отправлено</u></b> ✅'
+        except ApiRequestFailed:
+            status_message = '<b><u>Не получилось отправить</u></b> ❌'
 
-        await self.render_widget('<b><u>Успешно отправлено</u></b> ✅')
+        await self.render_widget(status_message)
         await self.state.set_state(FSM.check_menu_command)
