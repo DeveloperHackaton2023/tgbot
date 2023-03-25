@@ -1,6 +1,7 @@
 from typing import Any
 
-from services.auth import AuthService, ApiRequestFailed
+from services._exceptions import ApiRequestFailed
+from services.auth import AuthService
 from ..menu import show_menu
 from ._states import FSM
 from ._base import BaseHandler

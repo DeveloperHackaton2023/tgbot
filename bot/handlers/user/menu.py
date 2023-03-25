@@ -6,6 +6,7 @@ from aiogram.types import Message, ReplyKeyboardRemove
 from ui.keyboards.menu import MenuMarkup
 from ._states import FSM
 from .add_ticket.init import InitRegisterHandler
+from .my_tickets.my_tickets import MyTicketsHandler
 
 
 async def show_menu(message: Message, state: FSMContext):
@@ -18,6 +19,8 @@ async def check_menu_command(message: Message, state: FSMContext, data: dict):
     match message.text:
         case MenuMarkup.buttons.add_ticket:
             await InitRegisterHandler(message, state=state, data=data)
+        case MenuMarkup.buttons.my_tickets:
+            await MyTicketsHandler(message, state=state, data=data)
         case 'q':
             await state.set_state(FSM.finish)
             await message.answer('Пока', reply_markup=ReplyKeyboardRemove())

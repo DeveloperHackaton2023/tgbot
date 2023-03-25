@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from aiogram.types import Message
 
 from contrib.handlers.message.context_manager import BaseContextManager, Property
-from services.auth import OsiUser, OsiUserInfo, Flat
+from services._types import OsiUser, OsiUserInfo, Flat
 
 
 class _Properties:

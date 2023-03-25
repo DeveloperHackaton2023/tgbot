@@ -1,7 +1,7 @@
 from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 from aiogram.types import KeyboardButton, InlineKeyboardButton
 
-from services.auth import Flat
+from services._types import Flat
 
 user_flats = ReplyKeyboardBuilder(
     [

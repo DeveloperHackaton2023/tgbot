@@ -9,6 +9,7 @@ python-dotenv = "*"
 tortoise-orm = "*"
 varname = "*"
 requests = "*"
+python-dateutil = "*"
 
 [dev-packages]
 flake8 = "*"

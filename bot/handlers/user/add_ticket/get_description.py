@@ -1,8 +1,8 @@
 from typing import Any
 
-from services.auth import Ticket, ApiRequestFailed
+from services._exceptions import ApiRequestFailed
+from services._types import Ticket
 from services.tickets import TicketsService
-from ui.keyboards.menu import MenuMarkup
 from .._states import FSM
 from ._base import BaseHandler
 
