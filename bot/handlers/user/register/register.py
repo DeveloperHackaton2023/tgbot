@@ -1,5 +1,4 @@
 from typing import Any
-from pprint import pprint
 
 from services.auth import AuthService
 from ..menu import show_menu

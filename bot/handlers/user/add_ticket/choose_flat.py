@@ -10,7 +10,6 @@ class ChooseFlatHandler(_BaseHandler, BaseHandler):
         await self.state.set_state(FSM.finish)
         await self.event.message.delete()
         flat_id = self.event.data.split(':')[1]
-        print(flat_id)
         self.set(self.props.flat_id, int(flat_id))
-        await self.event.message.answer('Задайте заголовок проблемы')
+        await self.render_widget()
         await self.state.set_state(FSM.get_subject)
