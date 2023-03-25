@@ -8,6 +8,7 @@ aiogram = "==3.0.0b6"
 python-dotenv = "*"
 tortoise-orm = "*"
 varname = "*"
+requests = "*"
 
 [dev-packages]
 flake8 = "*"

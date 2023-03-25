@@ -8,5 +8,6 @@ from ._states import FSM
 class InitRegisterHandler(BaseHandler):
     async def handle(self) -> Any:
         await self.state.set_state(FSM.finish)
+        self.clean_context(exclude=[self.props.osi_user])
         await self.event.answer('Выберите квартиру', reply_markup=user_flats)
         await self.state.set_state(FSM.choose_flat)

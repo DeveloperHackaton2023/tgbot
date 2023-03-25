@@ -12,10 +12,7 @@ class GetIinHandler(BaseHandler, OneTimeMessageHandlerExtension):
         await self.state.set_state(FSM.finish)
         await self.event.delete()
 
-        iin = int(self.event.text)
-        self.set(self.props.iin, iin)
-
-        text = AuthForm(iin=self.ctx.iin).render()
+        self.set(self.props.iin, self.event.text)
 
         await self.render_widget()
         self._set_one_time_message(
