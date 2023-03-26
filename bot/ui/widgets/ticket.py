@@ -8,5 +8,7 @@ class Ticket:
     def render(self) -> str:
         text = f'<b>{self.info.ticket.subject}</b>\n'
         # text += self.info.ticket.description + '\n\n'
-        text += f'Статус: {self.info.status.value}'
+        if self.info.admin_response:
+            text += f'<u>Ответ администратора:</u> {self.info.admin_response}\n'
+        text += f'<u>Статус:</u> <b>{self.info.status.value}</b>'
         return text

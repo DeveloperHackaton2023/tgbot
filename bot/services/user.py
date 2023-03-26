@@ -1,4 +1,5 @@
 from dateutil.parser import parse
+from typing import Optional
 
 from ._types import OsiUser, OsiUserInfo, Flat, Ticket, TicketInfo, TicketStatus
 from ._base import BaseApiService
@@ -16,10 +17,13 @@ class UserService(BaseApiService):
 
     @classmethod
     def _serialize_flat(cls, data: dict) -> Flat:
+        info = data['info']
+        if not data['info']:
+            info = ''
         return Flat(
             id=data['id'],
             address=data['address'],
-            info=data['info'],
+            info=info,
             flat_number=data['flatNumber'],
             tickets=[cls._serialize_ticket(t) for t in data['tickets']]
         )
@@ -32,7 +36,8 @@ class UserService(BaseApiService):
                 description=data['description']
             ),
             created_at=parse(data['created']),
-            status=cls._serialize_status(data['statuses'][-1]['title'])
+            status=cls._serialize_status(data['statuses'][-1]['title']),
+            admin_response=cls._serialize_admin_response(data['adminResponse'])
         )
 
     @classmethod
@@ -48,3 +53,10 @@ class UserService(BaseApiService):
                 return TicketStatus.SUCCESS
             case _:
                 raise ValueError
+
+    @classmethod
+    def _serialize_admin_response(cls, resp: str) -> Optional[str]:
+        if resp == 'Null':
+            return None
+        return resp
+
