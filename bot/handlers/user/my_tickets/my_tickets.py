@@ -9,6 +9,8 @@ from ._base import BaseHandler
 
 class MyTicketsHandler(BaseHandler):
     async def handle(self) -> Any:
+        await self.state.set_state(FSM.finish)
+        await self.event.delete()
         await self.event.answer('Ваши заявки: ')
         tickets = TicketsService.get_user_tickets(self.ctx.osi_user)
         for ticket in tickets:
