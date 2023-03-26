@@ -6,6 +6,7 @@ class _UserCommands(_Commands):
     start = 'start'
     register = 'register'
     add_ticket = 'add_ticket'
+    my_tickets = 'my_tickets'
 
 
 USER_COMMANDS = _UserCommands()
