@@ -34,6 +34,7 @@ class TicketInfo:
 class Flat:
     id: int
     address: str
+    flat_number: str
     info: str
     tickets: list[TicketInfo]
 

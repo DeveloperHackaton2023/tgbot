@@ -20,6 +20,7 @@ class UserService(BaseApiService):
             id=data['id'],
             address=data['address'],
             info=data['info'],
+            flat_number=data['flatNumber'],
             tickets=[cls._serialize_ticket(t) for t in data['tickets']]
         )
 

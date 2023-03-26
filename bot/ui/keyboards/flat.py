@@ -20,7 +20,7 @@ class FlatsMarkup:
             [
                 [
                     InlineKeyboardButton(
-                        text=flat.address,
+                        text=flat.address + ' : ' + flat.flat_number,
                         callback_data=f'{cls.prefix}:{flat.id}'
                     )
                 ]
