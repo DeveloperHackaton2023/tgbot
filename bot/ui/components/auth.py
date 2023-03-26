@@ -29,8 +29,11 @@ class AuthForm(BaseComponent):
                           new_line: bool = True) -> str:
         highlight = self._is_property_not_exist(prop) \
             and not self.__has_highlighted_property
+        hidden_prop = None
+        if prop:
+            hidden_prop = f'<tg-spoiler>{prop}</tg-spoiler>'
         text = self._highlight_if(
-            highlight, prefix + self._render_if_exist(prop, '... '))
+            highlight, prefix + self._render_if_exist(hidden_prop, '... '))
         if new_line:
             text += '\n'
 
